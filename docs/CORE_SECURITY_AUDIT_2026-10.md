@@ -2,7 +2,7 @@
 
 Date of review: 2026-10-20
 Subject: `hidewell-core` and `hidewell-ffi` (this repository), as published in its initial release
-Report version: 1.1
+Report version: 1.2
 
 ## 1. Executive summary
 
@@ -292,7 +292,7 @@ Recorded on the released code.
 Prioritised; each is grounded in a finding or a stated scope gap.
 
 1. Obtain a second review of the construction by a different reviewer. Its value is uncorrelated blind spots, not relative skill; this is standard practice for security-critical code whoever performed the first review.
-2. Fuzz the untrusted-input decoders continuously: `Pattern::decode`, `index::from_padded`/`from_bytes` on `Root`, `AnchorRecord`, page item lists and `DeviceState` (`decode_state`), `backup::open_entry`, and `Device::open` over mutated container bytes. Property tests cover only the areas listed in section 2. The repository ships seven libFuzzer targets in `fuzz/`, run with `scripts/fuzz.sh` (not run by CI); the initial campaign, 60 s per target on one core (rustc nightly 1.101, cargo-fuzz 0.13.2), found no crashes or hangs: `anchor_decode` 3.04 M runs, `device_state_decode` 2.57 M, `page_decode` 1.74 M, `pattern_decode` 1.74 M, `root_decode` 1.51 M, `entry_open` 47.7 k, `device_open` 10.4 k (each run opens, unlocks and reads a container through the KDF). Longer and continuous runs are recommended.
+2. Fuzz the untrusted-input decoders continuously: `Pattern::decode`, `index::from_padded`/`from_bytes` on `Root`, `AnchorRecord`, page item lists and `DeviceState` (`decode_state`), `backup::open_entry`, and `Device::open` over mutated container bytes. Property tests cover only the areas listed in section 2. The repository ships seven libFuzzer targets in `fuzz/`, run with `scripts/fuzz.sh`; the `fuzz` GitHub Actions workflow runs them nightly for 600 s per target with the corpus cached between runs and crash artifacts uploaded on failure. The initial campaign, 60 s per target on one core (rustc nightly 1.101, cargo-fuzz 0.13.2), found no crashes or hangs: `anchor_decode` 3.04 M runs, `device_state_decode` 2.57 M, `page_decode` 1.74 M, `pattern_decode` 1.74 M, `root_decode` 1.51 M, `entry_open` 47.7 k, `device_open` 10.4 k (each run opens, unlocks and reads a container through the KDF). A failing nightly run should be treated as a Medium finding until triaged.
 3. Evaluate an external rollback-resistant attempt counter for HW-C-13 where the platform offers one (for example a Secure Enclave or StrongBox-held counter or key-rotation scheme), and record the decision in `THREAT_MODEL.md` item 8.
 4. Consider a space-reclamation pass for HW-C-11/HW-C-12 only if container growth from leaked allocations is observed in practice; it is a capacity concern, not a security one.
 
@@ -328,3 +328,4 @@ cargo test -p hidewell-core --profile perf --test bench_unlock -- --ignored --no
 
 - 1.0 (2026-10-20): initial report.
 - 1.1 (2026-10-21): fact-check against the released code; source size, property-test list, crate table (`rand_core`, `serde` patch version, FFI manifest) and the note that fuzzing is not run by CI corrected. Finding statuses, counts and verification results re-run and unchanged; HW-C-17 remains open.
+- 1.2 (2026-10-21): recommendation 2 records the nightly `fuzz` workflow.

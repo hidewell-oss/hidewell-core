@@ -52,7 +52,9 @@ scripts/fuzz.sh 60                 # every target for 60 s; scripts/fuzz.sh 300 
 
 Seeds live in `fuzz/seeds/<target>/` (regenerate after a format change with
 `cargo test -p hidewell-core --features fuzzing -- --ignored write_fuzz_seeds`); the growing
-corpus and crash artifacts are git-ignored. The targets reach crate-private decoders through
+corpus and crash artifacts are git-ignored. The `fuzz` workflow runs every target nightly for
+600 s (`workflow_dispatch` takes a duration), caching the corpus between runs and uploading
+crash artifacts on failure. The targets reach crate-private decoders through
 `hidewell_core::fuzz_api`, compiled only with the `fuzzing` feature (which implies
 `mock-oracle`, so it cannot be built into a release).
 
