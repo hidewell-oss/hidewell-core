@@ -1,6 +1,6 @@
 [package]
 name = "uniffi-bindgen"
-version = "0.1.0"
+version = "1.0.0"
 description = "Local uniffi-bindgen CLI (pinned to the workspace uniffi version)."
 edition.workspace = true
 license.workspace = true

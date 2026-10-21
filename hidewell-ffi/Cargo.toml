@@ -1,6 +1,6 @@
 [package]
 name = "hidewell-ffi"
-version = "0.1.0"
+version = "1.0.0"
 description = "UniFFI bindings (Swift/Kotlin) for hidewell-core."
 edition.workspace = true
 license.workspace = true

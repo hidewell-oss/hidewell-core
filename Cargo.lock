@@ -659,7 +659,7 @@ dependencies = [
 
 [[package]]
 name = "hidewell-core"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "aes-gcm",
  "argon2",
@@ -684,7 +684,7 @@ dependencies = [
 
 [[package]]
 name = "hidewell-ffi"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "hidewell-core",
  "uniffi",
@@ -1362,7 +1362,7 @@ dependencies = [
 
 [[package]]
 name = "uniffi-bindgen"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "uniffi",
 ]

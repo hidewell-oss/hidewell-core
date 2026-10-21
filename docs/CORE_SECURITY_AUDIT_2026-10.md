@@ -1,8 +1,8 @@
 # Hidewell Rust Core: Security Review Report, October 2026
 
 Date of review: 2026-10-20
-Subject: `hidewell-core` and `hidewell-ffi` (this repository), as published in its initial release
-Report version: 1.2
+Subject: `hidewell-core` and `hidewell-ffi` (this repository), as published in its initial release, tag `v1.0.0`
+Report version: 1.3
 
 ## 1. Executive summary
 
@@ -329,3 +329,4 @@ cargo test -p hidewell-core --profile perf --test bench_unlock -- --ignored --no
 - 1.0 (2026-10-20): initial report.
 - 1.1 (2026-10-21): fact-check against the released code; source size, property-test list, crate table (`rand_core`, `serde` patch version, FFI manifest) and the note that fuzzing is not run by CI corrected. Finding statuses, counts and verification results re-run and unchanged; HW-C-17 remains open.
 - 1.2 (2026-10-21): recommendation 2 records the nightly `fuzz` workflow.
+- 1.3 (2026-10-21): subject names the release tag `v1.0.0`.
