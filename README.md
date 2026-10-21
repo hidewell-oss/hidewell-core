@@ -75,7 +75,7 @@ Consuming the bindings: add `bindings/swift/HidewellCore` as a local Swift packa
 
 ## Security contact
 
-Please report vulnerabilities privately to: contact@sentrybrain.com. Do not open public issues for security reports.
+Please report vulnerabilities privately to: contact@hidewell.app. Do not open public issues for security reports.
 
 ## License
 

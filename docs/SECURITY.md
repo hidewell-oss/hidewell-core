@@ -2,7 +2,7 @@
 
 Scope: this repository (`hidewell-core`, `hidewell-ffi`; Rust, MIT OR Apache-2.0). Threats and residual leakage: [`THREAT_MODEL.md`](THREAT_MODEL.md).
 
-Reporting a vulnerability: email contact@sentrybrain.com privately; do not open a public issue.
+Reporting a vulnerability: email contact@hidewell.app privately; do not open a public issue.
 
 Audit status: independent security review by Claude Fable 5.1 (Anthropic), October 2026; see [`CORE_SECURITY_AUDIT_2026-10.md`](CORE_SECURITY_AUDIT_2026-10.md).
 
