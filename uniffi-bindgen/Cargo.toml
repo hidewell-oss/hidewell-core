@@ -1,0 +1,13 @@
+[package]
+name = "uniffi-bindgen"
+version = "0.1.0"
+description = "Local uniffi-bindgen CLI (pinned to the workspace uniffi version)."
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version = "1.88"
+publish = false
+default-run = "uniffi-bindgen"
+
+[dependencies]
+uniffi = { version = "0.32.2", features = ["cli"] }

@@ -1,0 +1,74 @@
+[package]
+name = "hidewell-core-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+# Separate workspace: the main workspace excludes `fuzz` (nightly-only libFuzzer build).
+[workspace]
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+arbitrary = { version = "1", features = ["derive"] }
+
+[dependencies.hidewell-core]
+path = "../hidewell-core"
+features = ["fuzzing"]
+
+[[bin]]
+name = "pattern_decode"
+path = "fuzz_targets/pattern_decode.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "root_decode"
+path = "fuzz_targets/root_decode.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "anchor_decode"
+path = "fuzz_targets/anchor_decode.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "page_decode"
+path = "fuzz_targets/page_decode.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "device_state_decode"
+path = "fuzz_targets/device_state_decode.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "entry_open"
+path = "fuzz_targets/entry_open.rs"
+test = false
+doc = false
+bench = false
+
+
+[[bin]]
+name = "device_open"
+path = "fuzz_targets/device_open.rs"
+test = false
+doc = false
+bench = false

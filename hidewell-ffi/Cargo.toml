@@ -1,0 +1,17 @@
+[package]
+name = "hidewell-ffi"
+version = "0.1.0"
+description = "UniFFI bindings (Swift/Kotlin) for hidewell-core."
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version = "1.88"
+publish = false
+
+[lib]
+crate-type = ["lib", "staticlib", "cdylib"]
+name = "hidewell_ffi"
+
+[dependencies]
+hidewell-core = { path = "../hidewell-core" }
+uniffi = "0.32.2"

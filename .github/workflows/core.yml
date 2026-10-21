@@ -1,0 +1,52 @@
+name: core
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Rust toolchain (stable, clippy, rustfmt)
+        run: |
+          rustup toolchain install stable --profile minimal --component clippy,rustfmt
+          rustup default stable
+
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: cargo-${{ runner.os }}-${{ hashFiles('Cargo.lock') }}
+
+      - name: Format
+        run: cargo fmt --all --check
+
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+
+      - name: Tests
+        run: cargo test --workspace --locked
+
+      # The software mock oracle must never compile into a release build.
+      - name: mock-oracle is refused in release builds
+        run: |
+          if out="$(cargo build --locked -p hidewell-core --release --features mock-oracle 2>&1)"; then
+            echo "::error::release build with feature mock-oracle succeeded"
+            exit 1
+          fi
+          echo "$out" | grep -q 'feature `mock-oracle` is for tests only' || { echo "$out"; exit 1; }
+          echo "OK: release build with mock-oracle refused"
+
+      - name: Log scrub (no logging in shipped Rust)
+        run: scripts/check-log-scrub.sh

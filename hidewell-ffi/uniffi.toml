@@ -1,0 +1,8 @@
+[bindings.kotlin]
+package_name = "com.sentrybrain.hidewell.core"
+cdylib_name = "hidewell_ffi"
+
+[bindings.swift]
+module_name = "HidewellCore"
+ffi_module_name = "HidewellCoreFFI"
+ffi_module_filename = "HidewellCoreFFI"
